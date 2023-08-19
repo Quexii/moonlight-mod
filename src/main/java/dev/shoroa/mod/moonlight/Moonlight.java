@@ -8,6 +8,7 @@ import net.devtech.arrp.api.RRPCallback;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Style;
@@ -25,6 +26,7 @@ public class Moonlight implements ModInitializer {
     public static final String MOD_ID = "moonlight";
     public static final Logger logger = LogManager.getLogger(MOD_ID);
     public static final RuntimeResourcePack rrp = RuntimeResourcePack.create(MOD_ID);
+    public static ItemGroup MOONLIGHT_ITEM_GROUP;
     @Override
     public void onInitialize() {
         final Item ITEM_GROUP_ICON = Registry.register(Registries.ITEM, new Identifier(MOD_ID,"item_group_icon"),
@@ -32,10 +34,10 @@ public class Moonlight implements ModInitializer {
                         Text.literal("This item is for the creative tab").setStyle(Style.EMPTY.withColor(0xc73f38)),
                         Text.literal("You probably shouldn't have this!").setStyle(Style.EMPTY.withColor(0xc73f38))
                 ));
-        ResourceRegister.registerItemModel("item_group_icon", "item/generated", Map.entry("layer0", "item_group_icon"));
+       ResourceRegister.registerItemModel("item_group_icon", "item/generated", Map.entry("layer0", "item_group_icon"));
 
         BlockRegister.register();
-        GroupRegister.register("item_group", "Moonlight", ITEM_GROUP_ICON);
+        MOONLIGHT_ITEM_GROUP = GroupRegister.register("item_group", "Moonlight", ITEM_GROUP_ICON);
         ResourceRegister.register();
         RRPCallback.EVENT.register(e -> e.add(rrp));
         rrp.dump(new File("test"));

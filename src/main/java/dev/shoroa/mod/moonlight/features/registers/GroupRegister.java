@@ -14,7 +14,7 @@ import java.util.LinkedHashMap;
 
 public class GroupRegister {
     public static final LinkedHashMap<String, ItemGroup> itemGroups = new LinkedHashMap<>();
-    public static void register(String groupName, String displayName, Item displayItem) {
+    public static ItemGroup register(String groupName, String displayName, Item displayItem) {
         ItemGroup ig = FabricItemGroup.builder().icon(() -> new ItemStack(displayItem)).displayName(Text.translatable(displayName))
                 .entries((context,entries) -> {
                     for (Item blockItem : BlockRegister.blockItems) entries.add(new ItemStack(blockItem));
@@ -22,5 +22,6 @@ public class GroupRegister {
                 .build();
         Registry.register(Registries.ITEM_GROUP, new Identifier(Moonlight.MOD_ID, groupName), ig);
         itemGroups.put(groupName, ig);
+        return ig;
     }
 }
